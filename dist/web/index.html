@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>오늘부터 부자</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet"></noscript>
+  <script type="module" crossorigin src="/assets/index-CToMYC3I.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C_JMH_sS.css">
+</head>
+<body>
+<script>
+window.onerror = function(msg, src, line, col, err) {
+  var d = document.createElement('div');
+  d.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#c0392b;color:#fff;padding:12px;font-size:12px;z-index:99999;word-break:break-all;white-space:pre-wrap;';
+  d.textContent = '❌ JS ERROR\n' + msg + '\n' + src + ':' + line + '\n' + (err && err.stack ? err.stack : '');
+  document.body.appendChild(d);
+};
+window.addEventListener('unhandledrejection', function(e) {
+  var d = document.createElement('div');
+  d.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#8e44ad;color:#fff;padding:12px;font-size:12px;z-index:99999;word-break:break-all;white-space:pre-wrap;margin-top:60px;';
+  d.textContent = '❌ PROMISE ERROR\n' + (e.reason && e.reason.stack ? e.reason.stack : String(e.reason));
+  document.body.appendChild(d);
+});
+</script>
+  <div id="app">
+    <!-- ==================== 온보딩 ==================== -->
+    <section id="screen-onboarding-welcome" class="screen active">
+      <div class="onboarding-container">
+        <div class="onboarding-hero">
+          <div class="gold-circle-anim">
+            <span class="hero-icon">&#x1F331;</span>
+          </div>
+          <h1 class="onboarding-title">오늘부터 부자</h1>
+          <p class="onboarding-subtitle">세계 부자들의 습관을 내 것으로</p>
+          <p class="onboarding-desc">워렌 버핏, 빌 게이츠, 일론 머스크가<br>매일 실천하는 습관으로 당신의 일상을 바꿔요</p>
+        </div>
+        <div class="onboarding-bottom">
+          <button class="btn-primary btn-full" onclick="App.goToScreen('screen-onboarding-goal')">시작하기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 온보딩 Step 1: 목표 자산 -->
+    <section id="screen-onboarding-goal" class="screen">
+      <div class="screen-content">
+        <div class="nav-bar">
+          <button class="nav-back" onclick="App.goToScreen('screen-onboarding-welcome')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="nav-title">목표 설정</span>
+          <span class="nav-step">1/3</span>
+        </div>
+        <div class="onboarding-body">
+          <h2 class="section-title">목표 자산을 알려주세요</h2>
+          <p class="section-desc">목표에 맞는 부자 롤모델을 추천해 드려요</p>
+          <div class="goal-grid">
+            <button class="goal-card" data-goal="1억" onclick="App.selectGoal(this)">
+              <span class="goal-emoji">&#x1F4B0;</span>
+              <span class="goal-amount">1억</span>
+              <span class="goal-label">안정적인 시작</span>
+            </button>
+            <button class="goal-card" data-goal="3억" onclick="App.selectGoal(this)">
+              <span class="goal-emoji">&#x1F4B5;</span>
+              <span class="goal-amount">3억</span>
+              <span class="goal-label">단단한 기반</span>
+            </button>
+            <button class="goal-card" data-goal="10억" onclick="App.selectGoal(this)">
+              <span class="goal-emoji">&#x1F48E;</span>
+              <span class="goal-amount">10억</span>
+              <span class="goal-label">경제적 자유</span>
+            </button>
+            <button class="goal-card" data-goal="무제한" onclick="App.selectGoal(this)">
+              <span class="goal-emoji">&#x1F680;</span>
+              <span class="goal-amount">무제한</span>
+              <span class="goal-label">끝없는 성장</span>
+            </button>
+          </div>
+        </div>
+        <div class="screen-bottom">
+          <button class="btn-primary btn-full" id="btn-goal-next" disabled onclick="App.goToScreen('screen-onboarding-role')">다음</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 온보딩 Step 2: 롤모델 -->
+    <section id="screen-onboarding-role" class="screen">
+      <div class="screen-content">
+        <div class="nav-bar">
+          <button class="nav-back" onclick="App.goToScreen('screen-onboarding-goal')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="nav-title">롤모델 선택</span>
+          <span class="nav-step">2/3</span>
+        </div>
+        <div class="onboarding-body">
+          <h2 class="section-title">누구의 습관을 따라할까요?</h2>
+          <p class="section-desc">롤모델의 핵심 습관으로 루틴을 구성해요</p>
+          <div class="role-list" id="role-list"></div>
+        </div>
+        <div class="screen-bottom">
+          <button class="btn-primary btn-full" id="btn-role-next" disabled onclick="App.goToScreen('screen-onboarding-profile')">다음</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 온보딩 Step 3: 생활 패턴 -->
+    <section id="screen-onboarding-profile" class="screen">
+      <div class="screen-content">
+        <div class="nav-bar">
+          <button class="nav-back" onclick="App.goToScreen('screen-onboarding-role')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="nav-title">생활 패턴</span>
+          <span class="nav-step">3/3</span>
+        </div>
+        <div class="onboarding-body">
+          <h2 class="section-title">생활 패턴을 알려주세요</h2>
+          <p class="section-desc">맞춤 부자 루틴을 설계해 드려요</p>
+          <div class="form-group">
+            <label class="form-label">닉네임</label>
+            <input type="text" id="input-nickname" class="form-input" placeholder="어떻게 불러드릴까요?" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label class="form-label">기상 시간</label>
+            <select id="input-wakeup" class="form-select">
+              <option value="5">5시 이전</option>
+              <option value="6" selected>6시</option>
+              <option value="7">7시</option>
+              <option value="8">8시 이후</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">취침 시간</label>
+            <select id="input-sleep" class="form-select">
+              <option value="22">22시</option>
+              <option value="23" selected>23시</option>
+              <option value="0">24시</option>
+              <option value="1">1시 이후</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">직업 유형</label>
+            <select id="input-job" class="form-select">
+              <option value="office">직장인</option>
+              <option value="business">사업가</option>
+              <option value="student">학생</option>
+              <option value="freelance">프리랜서</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
+        </div>
+        <div class="screen-bottom">
+          <button class="btn-primary btn-full" onclick="App.completeOnboarding()">부자 루틴 만들기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 홈 ==================== -->
+    <section id="screen-home" class="screen">
+      <div class="screen-content has-tab">
+        <div class="nav-bar">
+          <span class="nav-brand">오늘부터 부자</span>
+          <div class="nav-right">
+            <span class="nav-premium-badge" id="home-premium-badge" style="display:none">GOLD</span>
+            <span class="nav-level" id="home-level-badge"></span>
+          </div>
+        </div>
+
+        <!-- AI 코칭 메시지 -->
+        <div class="coach-bubble" id="coach-bubble">
+          <div class="coach-avatar">&#x1F9D1;&#x200D;&#x1F4BC;</div>
+          <div class="coach-message" id="coach-message"></div>
+        </div>
+
+        <!-- 오늘의 명언 -->
+        <div class="quote-card" id="daily-quote">
+          <p class="quote-text" id="quote-text"></p>
+          <p class="quote-author" id="quote-author"></p>
+        </div>
+
+        <!-- 오늘의 달성률 -->
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">오늘의 달성률</span>
+            <span class="progress-percent" id="today-percent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="today-progress" style="width:0%"></div>
+          </div>
+          <div class="wealth-gauge-mini">
+            <span class="wealth-label">자산 성장 게이지</span>
+            <span class="wealth-value" id="wealth-gauge-value">+0%</span>
+          </div>
+        </div>
+
+        <!-- 습관 리스트 -->
+        <div class="habit-section">
+          <div class="habit-time-group" id="morning-habits">
+            <h3 class="time-label">&#x1F305; 아침</h3>
+            <div class="habit-list" id="habit-list-morning"></div>
+          </div>
+          <div class="habit-time-group" id="afternoon-habits">
+            <h3 class="time-label">&#x2600;&#xFE0F; 낮</h3>
+            <div class="habit-list" id="habit-list-afternoon"></div>
+          </div>
+          <div class="habit-time-group" id="evening-habits">
+            <h3 class="time-label">&#x1F319; 저녁</h3>
+            <div class="habit-list" id="habit-list-evening"></div>
+          </div>
+          <button class="btn-add-habit" onclick="App.showAddHabitModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            습관 추가
+          </button>
+        </div>
+        <div class="tab-spacer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 통계 ==================== -->
+    <section id="screen-stats" class="screen">
+      <div class="screen-content has-tab">
+        <div class="nav-bar">
+          <span class="nav-brand">통계</span>
+        </div>
+        <div class="stats-body">
+          <!-- 주간 차트 -->
+          <div class="stats-card">
+            <div class="stats-nav">
+              <button class="stats-nav-btn" onclick="Stats.prevWeek()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <h3 class="stats-card-title" id="week-title">주간 달성률</h3>
+              <button class="stats-nav-btn" id="btn-week-next" onclick="Stats.nextWeek()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="chart-container" id="weekly-chart-container"><canvas id="weekly-chart"></canvas></div>
+          </div>
+          <!-- 월간 히트맵 -->
+          <div class="stats-card">
+            <div class="stats-nav">
+              <button class="stats-nav-btn" onclick="Stats.prevMonth()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <h3 class="stats-card-title" id="month-title">월간 기록</h3>
+              <button class="stats-nav-btn" id="btn-month-next" onclick="Stats.nextMonth()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="heatmap" id="monthly-heatmap"></div>
+            <div class="day-detail" id="day-detail" style="display:none"></div>
+          </div>
+          <!-- 주간 습관 분석 -->
+          <div class="stats-card">
+            <h3 class="stats-card-title">📅 이번 주 습관 분석</h3>
+            <div id="weekly-report"></div>
+          </div>
+          <!-- AI 리포트 -->
+          <div class="stats-card">
+            <h3 class="stats-card-title">오늘의 부자 리포트</h3>
+            <div class="ai-report" id="ai-report"></div>
+          </div>
+          <!-- 스트릭 -->
+          <div class="stats-card">
+            <h3 class="stats-card-title">연속 달성 기록</h3>
+            <div class="streak-info" id="streak-info"></div>
+          </div>
+        </div>
+        <div class="tab-spacer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 자산 시뮬레이터 ==================== -->
+    <section id="screen-simulator" class="screen">
+      <div class="screen-content has-tab">
+        <div class="nav-bar">
+          <span class="nav-brand">자산 시뮬레이터</span>
+        </div>
+        <div class="simulator-body">
+          <div class="sim-disclaimer">습관 실천에 따른 예상 자산 변화예요. 투자 조언이 아닌 동기부여 목적이에요.</div>
+          <div class="sim-inputs">
+            <div class="form-group">
+              <label class="form-label">현재 연소득 (만원)</label>
+              <input type="number" id="sim-income" class="form-input" value="4000" min="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">현재 저축액 (만원)</label>
+              <input type="number" id="sim-savings" class="form-input" value="500" min="0">
+            </div>
+            <!-- 심화 옵션 (Gold Pass) -->
+            <div id="sim-advanced-options" style="display:none">
+              <div class="sim-advanced-badge">Gold Pass 심화 시뮬레이션</div>
+              <div class="form-group">
+                <label class="form-label">인플레이션율 (%)</label>
+                <input type="number" id="sim-inflation" class="form-input" value="3" min="0" max="15" step="0.5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">이자/배당 소득세 (%)</label>
+                <input type="number" id="sim-tax" class="form-input" value="15.4" min="0" max="50" step="0.1">
+              </div>
+              <div class="form-group">
+                <label class="form-label">소득 대비 저축률 (%)</label>
+                <input type="number" id="sim-saving-ratio" class="form-input" value="30" min="0" max="100" step="5">
+              </div>
+            </div>
+            <div id="sim-advanced-lock" class="sim-lock-notice" style="display:none">
+              <span>&#x1F512;</span> 인플레이션, 세금 반영 심화 시뮬레이션은 <button class="btn-text-link" onclick="App.showPremiumModal('advanced_sim')">Gold Pass</button> 기능이에요.
+            </div>
+            <button class="btn-primary btn-full" onclick="App.runSimulation()">시뮬레이션 시작</button>
+          </div>
+          <div class="stats-card" id="sim-result-card" style="display:none">
+            <h3 class="stats-card-title">자산 성장 예측</h3>
+            <div class="chart-container chart-container-lg"><canvas id="wealth-chart"></canvas></div>
+            <div class="sim-summary" id="sim-summary"></div>
+          </div>
+        </div>
+        <div class="tab-spacer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 부자 도서관 ==================== -->
+    <section id="screen-library" class="screen">
+      <div class="screen-content has-tab">
+        <div class="nav-bar">
+          <span class="nav-brand">부자 도서관</span>
+        </div>
+        <div class="library-body">
+          <div class="library-tabs">
+            <button class="lib-tab active" data-tab="people" onclick="App.switchLibTab(this)">롤모델</button>
+            <button class="lib-tab" data-tab="stories" onclick="App.switchLibTab(this)">사례</button>
+            <button class="lib-tab" data-tab="quotes" onclick="App.switchLibTab(this)">명언</button>
+          </div>
+          <div class="lib-content" id="lib-content-people" style="display:flex">
+            <div class="rich-person-card">
+              <div class="rich-person-header">
+                <div class="rich-person-avatar">&#x1F4DA;</div>
+                <div>
+                  <div class="rich-person-name">워렌 버핏</div>
+                  <div class="rich-person-title">버크셔 해서웨이 회장</div>
+                  <div class="rich-person-worth">약 1,300억 달러</div>
+                </div>
+              </div>
+              <div class="rich-person-routine">6:45 기상 → 신문 5종 읽기 → 맥도날드 아침 → 독서 5~6시간</div>
+              <div class="rich-person-philosophy">"복리의 힘을 믿고, 장기적 관점으로 투자하라"</div>
+            </div>
+            <div class="rich-person-card">
+              <div class="rich-person-header">
+                <div class="rich-person-avatar">&#x1F680;</div>
+                <div>
+                  <div class="rich-person-name">일론 머스크</div>
+                  <div class="rich-person-title">테슬라/스페이스X CEO</div>
+                  <div class="rich-person-worth">약 2,500억 달러</div>
+                </div>
+              </div>
+              <div class="rich-person-routine">7시 기상 → 샤워 중 사고 → 이메일 30분 → 바로 업무</div>
+              <div class="rich-person-philosophy">"인류를 다행성 종으로 만들기 위해 매일 최선을 다한다"</div>
+            </div>
+            <div class="rich-person-card">
+              <div class="rich-person-header">
+                <div class="rich-person-avatar">&#x1F4D6;</div>
+                <div>
+                  <div class="rich-person-name">빌 게이츠</div>
+                  <div class="rich-person-title">마이크로소프트 공동 창업자</div>
+                  <div class="rich-person-worth">약 1,300억 달러</div>
+                </div>
+              </div>
+              <div class="rich-person-routine">7시 기상 → 1시간 트레드밀+영상 학습 → 독서</div>
+              <div class="rich-person-philosophy">"지식을 넓히고, 균형 잡힌 삶을 살아라"</div>
+            </div>
+            <div class="rich-person-card">
+              <div class="rich-person-header">
+                <div class="rich-person-avatar">&#x1F31F;</div>
+                <div>
+                  <div class="rich-person-name">오프라 윈프리</div>
+                  <div class="rich-person-title">미디어 기업가</div>
+                  <div class="rich-person-worth">약 25억 달러</div>
+                </div>
+              </div>
+              <div class="rich-person-routine">6시 기상 → 20분 명상 → 15분 운동 → 건강식 아침</div>
+              <div class="rich-person-philosophy">"내면의 성장이 외면의 성공을 만든다"</div>
+            </div>
+          </div>
+          <div class="lib-content" id="lib-content-stories" style="display:none">
+            <div class="story-card">
+              <span class="story-category">독서/학습</span>
+              <div class="story-title">워렌 버핏의 독서 습관</div>
+              <div class="story-body">워렌 버핏은 하루 5~6시간을 독서에 투자해요. 투자 파트너 찰리 멍거는 "워렌은 읽는 기계"라고 말했어요. 버핏은 투자를 시작한 이후 지금까지 수만 건의 기업 보고서를 읽었어요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">모닝 루틴</span>
+              <div class="story-title">팀 쿡의 3:45 기상</div>
+              <div class="story-body">애플 CEO 팀 쿡은 매일 새벽 3시 45분에 일어나요. "아침의 고요한 시간이 하루 중 가장 생산적인 시간"이라고 말했어요. 이메일 확인 후 1시간 운동으로 하루를 시작해요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">마인드셋</span>
+              <div class="story-title">레이 달리오의 명상 원칙</div>
+              <div class="story-body">세계 최대 헤지펀드 브릿지워터의 창업자 레이 달리오는 40년 넘게 매일 명상을 해왔어요. "명상은 내 인생에서 가장 좋은 선물"이라고 말하며, 팀원들에게도 명상을 권해요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">시간 관리</span>
+              <div class="story-title">마크 저커버그의 회색 티셔츠</div>
+              <div class="story-body">마크 저커버그는 매일 같은 회색 티셔츠를 입어요. "사소한 결정을 줄여야 중요한 결정에 에너지를 쓸 수 있다"고 했어요. 의사결정 피로를 줄이는 대표적인 사례예요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">마인드셋</span>
+              <div class="story-title">오프라 윈프리의 감사 노트</div>
+              <div class="story-body">오프라 윈프리는 20년 넘게 매일 감사한 것 5가지를 적어요. "감사 연습이 내 인생을 바꿨다"고 말하며, 가장 어려운 시기에도 감사할 것을 찾아요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">건강 관리</span>
+              <div class="story-title">제프 베조스의 8시간 수면</div>
+              <div class="story-body">아마존 창업자 제프 베조스는 반드시 8시간 수면을 지켜요. "수면 부족 상태에서는 좋은 의사결정을 할 수 없다"며, 모든 중요한 회의를 오전 10시 이후에 잡아요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">재테크 습관</span>
+              <div class="story-title">워렌 버핏의 검소한 생활</div>
+              <div class="story-body">1,300억 달러 자산가인 버핏은 1958년에 3만 1,500달러에 산 집에 아직 살아요. 매일 맥도날드에서 아침을 먹고, 체리콕을 마셔요. "필요하지 않은 것에 돈을 쓰지 않는 것"이 부의 비결이라고 해요.</div>
+            </div>
+            <div class="story-card">
+              <span class="story-category">건강 관리</span>
+              <div class="story-title">리처드 브랜슨의 운동 철학</div>
+              <div class="story-body">버진그룹 회장 리처드 브랜슨은 매일 아침 5시에 일어나 운동해요. "운동은 생산성을 두 배로 높여준다"고 말하며, 서핑, 테니스, 사이클링 등 다양한 운동을 즐겨요.</div>
+            </div>
+          </div>
+          <div class="lib-content" id="lib-content-quotes" style="display:none">
+            <div class="quote-list-card"><div class="quote-list-text">"하루에 500페이지를 읽어라. 지식은 그렇게 쌓이는 것이다. 복리처럼."</div><div class="quote-list-author">- 워렌 버핏</div><div class="quote-list-category">독서/학습</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"나는 매일 아침 거울을 보며 묻는다. 오늘이 인생 마지막 날이라면, 지금 하려는 일을 할 것인가?"</div><div class="quote-list-author">- 스티브 잡스</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"성공의 비밀은 일상을 지배하는 습관에 있다."</div><div class="quote-list-author">- 토마스 콜리</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"원칙에 기반한 삶을 살아라. 매일 명상으로 원칙을 점검한다."</div><div class="quote-list-author">- 레이 달리오</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"나는 한 달에 4권의 책을 읽는다. 세상을 이해하는 가장 좋은 방법이다."</div><div class="quote-list-author">- 빌 게이츠</div><div class="quote-list-category">독서/학습</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"에너지를 관리하면 시간이 늘어난다. 운동이 가장 좋은 투자다."</div><div class="quote-list-author">- 리처드 브랜슨</div><div class="quote-list-category">건강 관리</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"습관은 너무 가벼워서 느끼지 못하다가, 너무 무거워서 벗어나지 못한다."</div><div class="quote-list-author">- 워렌 버핏</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"실패해도 괜찮다. 시도하지 않는 것이 진짜 실패다."</div><div class="quote-list-author">- 제프 베조스</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"감사할수록 더 많은 것이 주어진다."</div><div class="quote-list-author">- 오프라 윈프리</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"가장 좋은 투자는 자기 자신에 대한 투자다."</div><div class="quote-list-author">- 워렌 버핏</div><div class="quote-list-category">재테크 습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"부자가 되려면 부자처럼 행동하라."</div><div class="quote-list-author">- 토마스 콜리</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"매일 1%씩 나아지면, 1년 후 37배가 된다."</div><div class="quote-list-author">- 제임스 클리어</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"성공한 사람과 그렇지 않은 사람의 차이는 매일의 루틴에 있다."</div><div class="quote-list-author">- 존 맥스웰</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"위험은 자기가 뭘 하는지 모르는 데서 온다."</div><div class="quote-list-author">- 워렌 버핏</div><div class="quote-list-category">재테크 습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"끊임없이 생각하라. 개선할 수 있는 방법을."</div><div class="quote-list-author">- 일론 머스크</div><div class="quote-list-category">시간 관리</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"불필요한 것을 사면, 필요한 것을 팔아야 할 날이 온다."</div><div class="quote-list-author">- 워렌 버핏</div><div class="quote-list-category">재테크 습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"수면은 리더십의 비밀 무기다."</div><div class="quote-list-author">- 아리아나 허핑턴</div><div class="quote-list-category">건강 관리</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"혼자서는 누구도 부자가 될 수 없다."</div><div class="quote-list-author">- 키스 페라지</div><div class="quote-list-category">네트워킹</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"인생에서 가장 중요한 투자는 관계에 대한 투자다."</div><div class="quote-list-author">- 빌 게이츠</div><div class="quote-list-category">네트워킹</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"복리는 세계 8번째 불가사의다. 이해하는 자는 벌고, 그렇지 못한 자는 지불한다."</div><div class="quote-list-author">- 알버트 아인슈타인</div><div class="quote-list-category">재테크 습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"당신의 습관이 곧 당신의 미래다."</div><div class="quote-list-author">- 잭 캔필드</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"목표를 적으면 이룰 확률이 42% 높아진다."</div><div class="quote-list-author">- 도미니칸 대학 연구</div><div class="quote-list-category">마인드셋</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"아침을 지배하는 자가 인생을 지배한다."</div><div class="quote-list-author">- 로빈 샤르마</div><div class="quote-list-category">모닝 루틴</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"작은 습관이 큰 변화를 만든다."</div><div class="quote-list-author">- 제임스 클리어</div><div class="quote-list-category">습관</div></div>
+            <div class="quote-list-card"><div class="quote-list-text">"부자의 습관은 부자를 만들고, 가난의 습관은 가난을 만든다."</div><div class="quote-list-author">- 토마스 콜리</div><div class="quote-list-category">습관</div></div>
+          </div>
+        </div>
+        <div class="tab-spacer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 프로필 ==================== -->
+    <section id="screen-profile" class="screen">
+      <div class="screen-content has-tab">
+        <div class="nav-bar">
+          <span class="nav-brand">프로필</span>
+        </div>
+        <div class="profile-body">
+          <div class="profile-header">
+            <div class="profile-level-circle" id="profile-level-circle">
+              <span class="level-icon" id="profile-level-icon"></span>
+            </div>
+            <h2 class="profile-name" id="profile-name"></h2>
+            <p class="profile-title" id="profile-title"></p>
+            <div class="xp-bar-wrap">
+              <div class="xp-bar">
+                <div class="xp-fill" id="profile-xp-fill"></div>
+              </div>
+              <span class="xp-text" id="profile-xp-text"></span>
+            </div>
+          </div>
+          <div class="profile-stats-grid">
+            <div class="profile-stat">
+              <span class="stat-value" id="prof-total-days">0</span>
+              <span class="stat-label">총 실천일</span>
+            </div>
+            <div class="profile-stat">
+              <span class="stat-value" id="prof-best-streak">0</span>
+              <span class="stat-label">최고 연속</span>
+            </div>
+            <div class="profile-stat">
+              <span class="stat-value" id="prof-total-habits">0</span>
+              <span class="stat-label">완료 습관</span>
+            </div>
+          </div>
+          <!-- 토스 로그인 -->
+          <div class="toss-login-section" id="toss-login-section"></div>
+
+          <!-- 개인정보 -->
+          <div class="profile-info-section">
+            <h3 class="section-title-sm">개인정보</h3>
+            <div class="profile-info-list" id="profile-info-list"></div>
+            <button class="btn-edit-profile" onclick="App.showEditProfileModal()">프로필 수정</button>
+          </div>
+
+          <!-- 구독 상태 -->
+          <div class="subscription-section" id="subscription-section"></div>
+
+          <!-- 뱃지 컬렉션 -->
+          <div class="badge-section">
+            <h3 class="section-title-sm">뱃지 컬렉션</h3>
+            <div class="badge-grid" id="badge-grid"></div>
+          </div>
+
+          <!-- 개발자 도구 (테스트용) -->
+          <div class="dev-tools-section">
+            <h3 class="section-title-sm">🛠 개발자 도구</h3>
+            <button class="btn-dev" onclick="App.devResetTodayHabits()">오늘 습관 체크 초기화</button>
+            <button class="btn-dev" onclick="App.devResetRoutineReward()">루틴 완료 보상 초기화</button>
+            <button class="btn-dev" onclick="App.devResetPremium()">프리미엄 구독 초기화</button>
+            <button class="btn-dev btn-dev-danger" onclick="App.devResetAll()">전체 데이터 초기화</button>
+          </div>
+        </div>
+        <div class="tab-spacer"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 습관 완료 모달 ==================== -->
+    <div class="modal-overlay" id="modal-complete" style="display:none">
+      <div class="modal-content">
+        <div class="modal-icon" id="modal-complete-icon"></div>
+        <h3 class="modal-title" id="modal-complete-title"></h3>
+        <p class="modal-message" id="modal-complete-message"></p>
+        <div class="modal-rich-tip" id="modal-complete-tip"></div>
+        <div class="modal-xp" id="modal-complete-xp"></div>
+        <button class="btn-primary btn-full" onclick="App.closeModal('modal-complete')">확인</button>
+      </div>
+    </div>
+
+    <!-- ==================== 뱃지 획득 모달 ==================== -->
+    <div class="modal-overlay" id="modal-badge" style="display:none">
+      <div class="modal-content">
+        <div class="modal-badge-icon" id="modal-badge-icon"></div>
+        <h3 class="modal-title">새로운 뱃지를 획득했어요!</h3>
+        <p class="modal-badge-name" id="modal-badge-name"></p>
+        <p class="modal-badge-desc" id="modal-badge-desc"></p>
+        <button class="btn-primary btn-full" onclick="App.closeModal('modal-badge')">멋져요!</button>
+      </div>
+    </div>
+
+    <!-- ==================== 레벨업 모달 ==================== -->
+    <div class="modal-overlay" id="modal-levelup" style="display:none">
+      <div class="modal-content">
+        <div class="modal-levelup-icon" id="modal-levelup-icon"></div>
+        <h3 class="modal-title">레벨업!</h3>
+        <p class="modal-levelup-text" id="modal-levelup-text"></p>
+        <button class="btn-primary btn-full" onclick="App.closeModal('modal-levelup')">좋아요!</button>
+      </div>
+    </div>
+
+    <!-- ==================== 루틴 100% 완료 + 2배 보상 모달 ==================== -->
+    <div class="modal-overlay" id="modal-routine-complete" style="display:none">
+      <div class="modal-content">
+        <div class="routine-complete-icon">🎉</div>
+        <h3 class="modal-title">오늘의 루틴 완료!</h3>
+        <!-- 부자 점수 티저 -->
+        <div class="routine-score-teaser">
+          <div class="routine-score-teaser-left">
+            <div class="routine-score-teaser-label">오늘의 부자 점수</div>
+            <div class="routine-score-teaser-value"><span class="routine-score-teaser-num">??</span><span class="routine-score-teaser-unit">점</span></div>
+            <div class="routine-score-teaser-rank">상위 <span class="routine-score-teaser-rank-num">??</span>%</div>
+            <div class="routine-score-teaser-hint">🔒 광고 시청 후 공개</div>
+          </div>
+          <div class="routine-score-teaser-contents">
+            <div class="routine-score-teaser-contents-title">리포트 포함 내용</div>
+            <div class="routine-score-teaser-item">✔ 내 부자 점수</div>
+            <div class="routine-score-teaser-item">✔ 상위 %</div>
+            <div class="routine-score-teaser-item">✔ 성장 분석</div>
+            <div class="routine-score-teaser-item">✔ AI 추천</div>
+          </div>
+        </div>
+        <div class="routine-stats">
+          <div class="routine-stat">
+            <span class="routine-stat-label">오늘 XP</span>
+            <span class="routine-stat-value" id="routine-today-xp">+0</span>
+          </div>
+          <div class="routine-stat-divider"></div>
+          <div class="routine-stat">
+            <span class="routine-stat-label">연속 달성</span>
+            <span class="routine-stat-value" id="routine-streak">0일</span>
+          </div>
+        </div>
+        <div class="routine-2x-banner">
+          <span class="routine-2x-icon">📺</span>
+          <div class="routine-2x-text">
+            <span class="routine-2x-title">광고 1회 → 보상 2배 + 부자 리포트 열기</span>
+            <span class="routine-2x-label" id="routine-2x-label">XP +0 → +0</span>
+          </div>
+        </div>
+        <button class="btn-primary btn-full" id="btn-routine-ad">지금 리포트 확인하기 🔓 (광고 시청)</button>
+        <button class="btn-ghost btn-full" id="btn-routine-skip" style="margin-top:8px">그냥 받을게요</button>
+      </div>
+    </div>
+
+    <!-- ==================== 오늘의 부자 리포트 모달 ==================== -->
+    <div class="modal-overlay" id="modal-ai-analysis" style="display:none">
+      <div class="modal-content modal-ai-analysis-content">
+        <div class="modal-add-header">
+          <h3 class="modal-title">오늘의 부자 리포트</h3>
+          <button class="modal-close-btn" onclick="App.closeModal('modal-ai-analysis')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <!-- 점수 + 추세 -->
+        <div class="ai-modal-score-row">
+          <div class="ai-modal-score-circle">
+            <span class="ai-modal-score-num" id="ai-modal-score-num">0</span>
+            <span class="ai-modal-score-unit">점</span>
+          </div>
+          <div class="ai-modal-score-meta">
+            <span class="ai-modal-trend" id="ai-modal-trend"></span>
+            <span class="ai-modal-days" id="ai-modal-days"></span>
+            <span class="ai-modal-grade" id="ai-modal-grade"></span>
+          </div>
+        </div>
+        <!-- 분석 내용 -->
+        <div id="ai-modal-content"></div>
+        <button class="ai-share-btn" onclick="Share.shareAIReport()" style="margin-top:4px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          부자 리포트 공유하기
+        </button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-ai-analysis')" style="margin-top:8px">닫기</button>
+      </div>
+    </div>
+
+    <!-- ==================== 부자 점수 비교 - 티저 모달 ==================== -->
+    <div class="modal-overlay" id="modal-compare-teaser" style="display:none">
+      <div class="modal-content modal-compare-content">
+        <div class="modal-add-header">
+          <h3 class="modal-title" id="compare-teaser-title">💰 당신의 오늘 부자 점수</h3>
+          <button class="modal-close-btn" onclick="App.closeModal('modal-compare-teaser')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <!-- 블러 점수 -->
+        <div class="compare-score-blur-card">
+          <div class="compare-score-blur-row">
+            <span class="compare-score-blur-num">??</span><span class="compare-score-blur-unit">점</span>
+          </div>
+          <div class="compare-rank-blur-row">상위 <span class="compare-rank-blur-num">??</span>%</div>
+        </div>
+        <!-- 인물 기준 + 현재 분석 -->
+        <div class="compare-person-context" id="compare-person-context"></div>
+        <div class="compare-current-title">당신은 현재</div>
+        <div id="compare-metrics-list"></div>
+        <!-- 행동 유도 훅 -->
+        <div class="compare-hook" id="compare-hook"></div>
+        <!-- CTA -->
+        <button class="btn-primary btn-full compare-reveal-btn" onclick="App.watchAdForCompare()">광고 보고 점수 공개 🔓</button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-compare-teaser')" style="margin-top:8px">닫기</button>
+      </div>
+    </div>
+
+    <!-- ==================== 부자 점수 비교 - 결과 모달 ==================== -->
+    <div class="modal-overlay" id="modal-compare-result" style="display:none">
+      <div class="modal-content modal-compare-content">
+        <div class="modal-add-header">
+          <h3 class="modal-title" id="modal-compare-result-title">💰 오늘의 부자 점수</h3>
+          <button class="modal-close-btn" onclick="App.closeModal('modal-compare-result')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div id="compare-result-content"></div>
+      </div>
+    </div>
+
+    <!-- ==================== 내일 점수 부스트 바텀시트 ==================== -->
+    <div class="modal-overlay" id="modal-tomorrow-boost" style="display:none" onclick="App._closeTomorrowBoostOnOverlay(event)">
+      <div class="tomorrow-boost-sheet">
+        <!-- Step 1: 분석 + 추천 -->
+        <div id="tboost-step1">
+          <div class="tboost-header">
+            <div class="tboost-title">📈 내일 점수 +10점 만들기</div>
+            <button class="modal-close-btn" onclick="App.closeModal('modal-tomorrow-boost')">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="tboost-weakness-badge" id="tboost-weakness-badge"></div>
+          <div class="tboost-recommend-label">🔥 가장 효과 큰 행동 선택</div>
+          <div id="tboost-options"></div>
+          <div class="tboost-expected-row">
+            👉 예상 내일 점수: <strong id="tboost-expected-score">--</strong>점
+          </div>
+        </div>
+        <!-- Step 3: 완료 확인 -->
+        <div id="tboost-step3" style="display:none">
+          <div class="tboost-done-icon">✅</div>
+          <div class="tboost-done-title">내일 점수 상승 예약 완료</div>
+          <div class="tboost-done-desc" id="tboost-done-desc"></div>
+          <div class="tboost-done-target" id="tboost-done-target"></div>
+          <button class="btn-primary btn-full" style="margin-top:20px" onclick="App.closeModal('modal-tomorrow-boost')">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 내일 부스트 배너 (다음날 재방문 시) ==================== -->
+    <div id="tomorrow-boost-banner" style="display:none">
+      <div class="tboost-banner-inner">
+        <div class="tboost-banner-left">
+          <div class="tboost-banner-badge">🔥 어제 예약한 루틴</div>
+          <div class="tboost-banner-name" id="tboost-banner-name"></div>
+          <div class="tboost-banner-reward" id="tboost-banner-reward"></div>
+        </div>
+        <button class="tboost-banner-btn" onclick="App.executeTomorrowBoost()">지금 실행하기</button>
+      </div>
+    </div>
+
+    <!-- ==================== 하단 배너 광고 ==================== -->
+    <div id="ad-banner" style="display:none"></div>
+
+    <!-- ==================== 보상형 광고 모달 (부자 찬스) ==================== -->
+    <div class="modal-overlay" id="modal-reward-ad" style="display:none">
+      <div class="modal-content">
+        <div class="modal-icon">&#x1F3B0;</div>
+        <h3 class="modal-title" id="reward-ad-title">부자 찬스!</h3>
+        <p class="modal-message" id="reward-ad-desc"></p>
+        <div class="reward-ad-progress" id="reward-ad-progress" style="display:none">
+          <div class="reward-ad-progress-bar" id="reward-ad-progress-bar"></div>
+        </div>
+        <button class="btn-primary btn-full" id="reward-ad-watch" style="margin-bottom:8px">영상 보고 찬스 받기</button>
+        <button class="btn-ghost btn-full" id="reward-ad-skip">다음에 할게요</button>
+      </div>
+    </div>
+
+    <!-- ==================== 프리미엄 업그레이드 모달 ==================== -->
+    <div class="modal-overlay" id="modal-premium" style="display:none">
+      <div class="modal-content">
+        <div class="modal-icon">&#x1F451;</div>
+        <h3 class="modal-title">Gold Pass</h3>
+        <p class="modal-message" id="premium-prompt-msg">Gold Pass로 더 많은 기능을 이용해 보세요!</p>
+        <div class="premium-plans">
+          <div class="premium-plan-card selected" data-plan="gold_monthly" onclick="App.selectPlan(this)">
+            <div class="plan-name">월간</div>
+            <div class="plan-price">4,900원<span>/월</span></div>
+          </div>
+          <div class="premium-plan-card" data-plan="gold_yearly" onclick="App.selectPlan(this)">
+            <div class="plan-badge">32% 할인</div>
+            <div class="plan-name">연간</div>
+            <div class="plan-price">39,900원<span>/년</span></div>
+            <div class="plan-monthly">월 3,325원</div>
+          </div>
+        </div>
+        <div class="premium-features">
+          <div class="premium-feature-item">&#x2705; 모든 광고 제거</div>
+          <div class="premium-feature-item">&#x2705; 무제한 습관 등록</div>
+          <div class="premium-feature-item">&#x2705; 심화 자산 시뮬레이션</div>
+          <div class="premium-feature-item">&#x2705; AI 프라이빗 코칭</div>
+        </div>
+        <button class="btn-primary btn-full" id="btn-premium-buy" onclick="App.purchasePremium()">Gold Pass 시작하기</button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-premium')" style="margin-top:8px">나중에 할게요</button>
+      </div>
+    </div>
+
+    <!-- ==================== 습관 추가 모달 ==================== -->
+    <div class="modal-overlay" id="modal-add-habit" style="display:none">
+      <div class="modal-content modal-add-habit-content">
+        <div class="modal-add-header">
+          <h3 class="modal-title">습관 추가</h3>
+          <button class="modal-close-btn" onclick="App.closeModal('modal-add-habit')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <!-- 탭: 추천 / 직접 입력 -->
+        <div class="add-habit-tabs">
+          <button class="add-habit-tab active" data-tab="recommend" onclick="App.switchAddHabitTab(this)">추천 습관</button>
+          <button class="add-habit-tab" data-tab="custom" onclick="App.switchAddHabitTab(this)">직접 입력</button>
+        </div>
+
+        <!-- 추천 습관 목록 -->
+        <div class="add-habit-panel" id="add-habit-recommend">
+          <div class="add-habit-filter" id="add-habit-filter"></div>
+          <div class="add-habit-list" id="add-habit-list"></div>
+        </div>
+
+        <!-- 직접 입력 -->
+        <div class="add-habit-panel" id="add-habit-custom" style="display:none">
+          <div class="form-group">
+            <label class="form-label">습관 이름</label>
+            <input type="text" class="form-input" id="custom-habit-name" placeholder="예: 물 2L 마시기" maxlength="30">
+          </div>
+          <div class="form-group">
+            <label class="form-label">시간대</label>
+            <div class="form-radio-group">
+              <label class="form-radio"><input type="radio" name="custom-time" value="morning" checked><span>&#x1F305; 아침</span></label>
+              <label class="form-radio"><input type="radio" name="custom-time" value="afternoon"><span>&#x2600;&#xFE0F; 낮</span></label>
+              <label class="form-radio"><input type="radio" name="custom-time" value="evening"><span>&#x1F319; 저녁</span></label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">카테고리</label>
+            <select class="form-input" id="custom-habit-category">
+              <option value="건강 관리">건강 관리</option>
+              <option value="독서/학습">독서/학습</option>
+              <option value="재테크 습관">재테크 습관</option>
+              <option value="마인드셋">마인드셋</option>
+              <option value="시간 관리">시간 관리</option>
+              <option value="네트워킹">네트워킹</option>
+              <option value="기타">기타</option>
+            </select>
+          </div>
+          <button class="btn-primary btn-full" onclick="App.addCustomHabit()">추가하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 프로필 수정 모달 ==================== -->
+    <div class="modal-overlay" id="modal-edit-profile" style="display:none">
+      <div class="modal-content modal-edit-profile-content">
+        <h3 class="modal-title">프로필 수정</h3>
+        <div class="form-group">
+          <label class="form-label">닉네임</label>
+          <input type="text" class="form-input" id="edit-nickname" placeholder="닉네임">
+        </div>
+        <div class="form-group">
+          <label class="form-label">직업</label>
+          <input type="text" class="form-input" id="edit-job" placeholder="직업">
+        </div>
+        <div class="form-group">
+          <label class="form-label">기상 시간</label>
+          <input type="time" class="form-input" id="edit-wakeup">
+        </div>
+        <div class="form-group">
+          <label class="form-label">취침 시간</label>
+          <input type="time" class="form-input" id="edit-sleep">
+        </div>
+        <div class="form-group">
+          <label class="form-label">목표 자산</label>
+          <select class="form-input" id="edit-target-wealth">
+            <option value="1억">1억</option>
+            <option value="3억">3억</option>
+            <option value="5억">5억</option>
+            <option value="10억">10억</option>
+            <option value="30억 이상">30억 이상</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">월 수입 (만원)</label>
+          <input type="number" class="form-input" id="edit-income" placeholder="4000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">현재 저축 (만원)</label>
+          <input type="number" class="form-input" id="edit-savings" placeholder="500">
+        </div>
+        <button class="btn-primary btn-full" onclick="App.saveProfile()">저장</button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-edit-profile')" style="margin-top:8px">취소</button>
+      </div>
+    </div>
+
+    <!-- ==================== 습관 삭제 확인 모달 ==================== -->
+    <div class="modal-overlay" id="modal-delete-habit" style="display:none">
+      <div class="modal-content">
+        <div class="modal-icon">&#x1F5D1;&#xFE0F;</div>
+        <h3 class="modal-title">습관 삭제</h3>
+        <p class="modal-message" id="delete-habit-msg"></p>
+        <button class="btn-danger btn-full" id="btn-confirm-delete" onclick="App.confirmDeleteHabit()">삭제하기</button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-delete-habit')" style="margin-top:8px">취소</button>
+      </div>
+    </div>
+
+    <!-- ==================== 습관 제한 안내 모달 ==================== -->
+    <div class="modal-overlay" id="modal-habit-limit" style="display:none">
+      <div class="modal-content">
+        <div class="modal-icon">&#x1F512;</div>
+        <h3 class="modal-title">습관 추가 제한</h3>
+        <p class="modal-message">무료 버전에서는 습관 3개까지 등록할 수 있어요.<br>Gold Pass로 무제한 습관을 관리해 보세요!</p>
+        <button class="btn-primary btn-full" onclick="App.closeModal('modal-habit-limit'); App.showPremiumModal('habit_limit')">Gold Pass 알아보기</button>
+        <button class="btn-ghost btn-full" onclick="App.closeModal('modal-habit-limit')" style="margin-top:8px">확인</button>
+      </div>
+    </div>
+
+    <!-- ==================== 플로팅 탭바 (토스 스타일) ==================== -->
+    <nav class="floating-tab-bar" id="tab-bar" style="display:none">
+      <button class="tab-item active" data-screen="screen-home" onclick="App.switchTab(this)">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="tab-label">홈</span>
+      </button>
+      <button class="tab-item" data-screen="screen-stats" onclick="App.switchTab(this)">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="tab-label">통계</span>
+      </button>
+      <button class="tab-item" data-screen="screen-simulator" onclick="App.switchTab(this)">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="tab-label">자산</span>
+      </button>
+      <button class="tab-item" data-screen="screen-library" onclick="App.switchTab(this)">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="tab-label">도서관</span>
+      </button>
+      <button class="tab-item" data-screen="screen-profile" onclick="App.switchTab(this)">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="tab-label">프로필</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- 핵심 스크립트 (초기 렌더링에 필요) -->
+  <script src="js/supabase-client.js"></script>
+  <script src="js/toss-auth.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/rich-db.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/ai-coach.js"></script>
+  <script src="js/habit-manager.js"></script>
+  <script src="js/app.js"></script>
+  <!-- 지연 로딩 스크립트 (초기 렌더링 불필요) -->
+  <script defer src="js/wealth-simulator.js"></script>
+  <script defer src="js/stats.js"></script>
+  <script defer src="js/share.js"></script>
+  <script defer src="js/payment.js"></script>
+  <script defer src="js/ad-manager.js"></script>
+  <script>
+    // Chart.js 지연 로딩 - 통계 탭 진입 시에만 로드
+    window._loadChartJs = function() {
+      if (window.Chart) return Promise.resolve();
+      return new Promise(function(resolve) {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+        s.onload = resolve;
+        document.head.appendChild(s);
+      });
+    };
+  </script>
+</body>
+</html>

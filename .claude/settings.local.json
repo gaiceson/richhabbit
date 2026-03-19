@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "WebFetch(domain:developers-apps-in-toss.toss.im)",
+      "Bash(node:*)",
+      "Bash(netstat -ano | grep 8081 | head -5)",
+      "Bash(taskkill //PID 157528 //F)",
+      "Bash(ipconfig | grep -A 2 \"IPv4\" | grep \"IPv4\" | head -3)",
+      "Bash(find /d/ai_project/1.tose/rich_habbit/src -type f \\\\\\(-name *.tsx -o -name *.ts \\\\\\))"
+    ]
+  }
+}
