@@ -3,9 +3,9 @@ import { defineConfig } from '@apps-in-toss/web-framework/config';
 export default defineConfig({
   appName: 'richhabbit',
   brand: {
-    displayName: '오늘부터 부자',
+    displayName: '부자습관',
     primaryColor: '#D4A574',
-    icon: '',
+    icon: 'https://raw.githubusercontent.com/gaiceson/richhabbit/main/public/logo.png',
   },
   web: {
     port: 5173,
